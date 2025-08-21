@@ -14,8 +14,8 @@ import GameUI from "./components/GameUI";
 export enum Controls {
   forward = 'forward',
   backward = 'backward',
-  left = 'left',
-  right = 'right',
+  leftward = 'leftward',
+  rightward = 'rightward',
   shoot = 'shoot',
   reload = 'reload'
 }
@@ -23,8 +23,8 @@ export enum Controls {
 const controls = [
   { name: Controls.forward, keys: ["KeyW", "ArrowUp"] },
   { name: Controls.backward, keys: ["KeyS", "ArrowDown"] },
-  { name: Controls.left, keys: ["KeyA", "ArrowLeft"] },
-  { name: Controls.right, keys: ["KeyD", "ArrowRight"] },
+  { name: Controls.leftward, keys: ["KeyA", "ArrowLeft"] },
+  { name: Controls.rightward, keys: ["KeyD", "ArrowRight"] },
   { name: Controls.shoot, keys: ["Space", "Mouse0"] },
   { name: Controls.reload, keys: ["KeyR"] },
 ];
@@ -53,10 +53,7 @@ function App() {
   }, [setBackgroundMusic, setHitSound, setSuccessSound]);
 
   return (
-    <div 
-      className={gamePhase === 'menu' ? 'game-cursor-visible' : 'game-cursor-hidden'}
-      style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}
-    >
+    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       {showCanvas && (
         <>
           {gamePhase === 'menu' && <StartScreen />}
@@ -66,9 +63,9 @@ function App() {
               <Canvas
                 shadows
                 camera={{
-                  position: [0, 2.7, 0],
-                  fov: 75,
-                  near: 0.01,
+                  position: [0, 5, 10],
+                  fov: 60,
+                  near: 0.1,
                   far: 1000
                 }}
                 gl={{

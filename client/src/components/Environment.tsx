@@ -111,39 +111,6 @@ export default function Environment({ phase }: EnvironmentProps) {
           <boxGeometry args={[2, 1.5, 4]} />
           <meshStandardMaterial color="#ffff00" />
         </mesh>
-        
-        {/* Hill at the end of the street - only in chapter2 */}
-        {phase === 'chapter2' && (
-          <>
-            {/* Main hill */}
-            <mesh position={[0, 8, -45]} castShadow>
-              <sphereGeometry args={[15, 16, 16]} />
-              <meshStandardMaterial map={grassTexture} color="#4a5d3a" />
-            </mesh>
-            
-            {/* Hill path/ramp */}
-            <mesh position={[0, 3, -35]} castShadow>
-              <boxGeometry args={[8, 6, 10]} />
-              <meshStandardMaterial map={grassTexture} color="#4a5d3a" />
-            </mesh>
-            
-            {/* Safety beacon on hill */}
-            <mesh position={[0, 16, -45]} castShadow>
-              <cylinderGeometry args={[0.5, 0.5, 8]} />
-              <meshStandardMaterial color="#ffff00" emissive="#ffff00" emissiveIntensity={0.3} />
-            </mesh>
-            
-            {/* Hill marker signs */}
-            <mesh position={[-3, 1.5, -25]} castShadow>
-              <boxGeometry args={[2, 3, 0.2]} />
-              <meshStandardMaterial color="#8B4513" />
-            </mesh>
-            <mesh position={[3, 1.5, -25]} castShadow>
-              <boxGeometry args={[2, 3, 0.2]} />
-              <meshStandardMaterial color="#8B4513" />
-            </mesh>
-          </>
-        )}
       </>
     );
   }

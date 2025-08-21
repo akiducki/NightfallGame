@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Show cursor in menu, hide during gameplay */
-.game-cursor-hidden {
-  cursor: none;
-}
-
-.game-cursor-visible {
-  cursor: default;
-}
-
 @layer base {
   * {
     @apply border-border;

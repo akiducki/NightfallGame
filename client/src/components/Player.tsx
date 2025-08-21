@@ -34,22 +34,26 @@ export default function Player() {
     // Movement
     if (controls.forward) {
       newZ -= speed * delta;
+      console.log("Moving forward, new Z:", newZ);
     }
     if (controls.backward) {
       newZ += speed * delta;
+      console.log("Moving backward, new Z:", newZ);
     }
-    if (controls.left) {
+    if (controls.leftward) {
       newX -= speed * delta;
+      console.log("Moving left, new X:", newX);
     }
-    if (controls.right) {
+    if (controls.rightward) {
       newX += speed * delta;
+      console.log("Moving right, new X:", newX);
     }
 
     // Constrain movement based on game phase
     if (gamePhase === 'prologue') {
-      // Strictly confined to room - walls at position 5, so player boundary at 4.7
-      newX = Math.max(-4.7, Math.min(4.7, newX));
-      newZ = Math.max(-4.7, Math.min(4.7, newZ));
+      // Confined to room
+      newX = Math.max(-4, Math.min(4, newX));
+      newZ = Math.max(-4, Math.min(4, newZ));
     } else if (gamePhase === 'chapter1' || gamePhase === 'chapter2') {
       // Street movement
       newX = Math.max(-10, Math.min(10, newX));
@@ -65,17 +69,13 @@ export default function Player() {
     setPlayerPosition(newPosition);
     meshRef.current.position.set(newX, 1, newZ);
 
-    // Shooting - now follows camera direction
+    // Shooting
     if (controls.shoot && Date.now() - lastShotTime.current > shootCooldown) {
       lastShotTime.current = Date.now();
       
-      // Get camera direction for bullet firing
-      const camera = state.camera;
-      const direction = new THREE.Vector3();
-      camera.getWorldDirection(direction);
-      
-      const bulletDirection: [number, number, number] = [direction.x, direction.y, direction.z];
-      const bulletStartPosition: [number, number, number] = [newX, 1.7, newZ]; // Start from eye level
+      // Fire bullet forward (negative Z direction)
+      const bulletDirection: [number, number, number] = [0, 0, -1];
+      const bulletStartPosition: [number, number, number] = [newX, 1.5, newZ - 1];
       
       fireBullet(bulletStartPosition, bulletDirection);
       playHit();
@@ -84,12 +84,15 @@ export default function Player() {
   });
 
   return (
-    <>
-      {/* Player body - hidden in first person, keep for collision detection */}
-      <mesh ref={meshRef} position={playerPosition || [0, 1, 0]} visible={false}>
-        <capsuleGeometry args={[0.5, 1.5]} />
-        <meshStandardMaterial color="#4444ff" />
+    <mesh ref={meshRef} position={playerPosition || [0, 1, 0]} castShadow>
+      <capsuleGeometry args={[0.5, 1.5]} />
+      <meshStandardMaterial color="#4444ff" />
+      
+      {/* Weapon indicator */}
+      <mesh position={[0.3, 0.2, -0.5]}>
+        <boxGeometry args={[0.1, 0.1, 0.8]} />
+        <meshStandardMaterial color="#333333" />
       </mesh>
-    </>
+    </mesh>
   );
 }

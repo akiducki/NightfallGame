@@ -45,19 +45,14 @@ export default function Boss({ health }: BossProps) {
     }
   }, [health, endGame]);
 
-  // Calculate health bar colors for 3 bars (600 total health)
-  const healthBar1 = health > 400 ? "#00ff00" : "#333333"; // First bar: 600-401
-  const healthBar2 = health > 200 ? (health > 400 ? "#00ff00" : "#ffff00") : "#333333"; // Second bar: 400-201
-  const healthBar3 = health > 0 ? (health > 200 ? "#ffff00" : "#ff0000") : "#333333"; // Third bar: 200-1
-
   return (
     <mesh ref={meshRef} position={bossPosition} castShadow>
-      <boxGeometry args={[2, 2.5, 2]} />
+      <boxGeometry args={[3, 4, 3]} />
       <meshStandardMaterial color="#800080" />
       
       {/* Weak spot - glowing red spot */}
-      <mesh position={[0, 0.5, 1.1]}>
-        <sphereGeometry args={[0.3]} />
+      <mesh position={[0, 1, 1.6]}>
+        <sphereGeometry args={[0.5]} />
         <meshStandardMaterial 
           color="#ff0000" 
           emissive="#ff0000" 
@@ -66,33 +61,19 @@ export default function Boss({ health }: BossProps) {
       </mesh>
       
       {/* Boss eyes */}
-      <mesh position={[-0.3, 0.5, 1.1]}>
-        <sphereGeometry args={[0.15]} />
+      <mesh position={[-0.5, 1, 1.6]}>
+        <sphereGeometry args={[0.2]} />
         <meshStandardMaterial color="#ffff00" emissive="#ffff00" emissiveIntensity={0.5} />
       </mesh>
-      <mesh position={[0.3, 0.5, 1.1]}>
-        <sphereGeometry args={[0.15]} />
+      <mesh position={[0.5, 1, 1.6]}>
+        <sphereGeometry args={[0.2]} />
         <meshStandardMaterial color="#ffff00" emissive="#ffff00" emissiveIntensity={0.5} />
       </mesh>
       
-      {/* 3 Health bars */}
-      <mesh position={[-0.8, 2.2, 0]}>
-        <planeGeometry args={[0.6, 0.2]} />
-        <meshBasicMaterial color={healthBar1} />
-      </mesh>
-      <mesh position={[0, 2.2, 0]}>
-        <planeGeometry args={[0.6, 0.2]} />
-        <meshBasicMaterial color={healthBar2} />
-      </mesh>
-      <mesh position={[0.8, 2.2, 0]}>
-        <planeGeometry args={[0.6, 0.2]} />
-        <meshBasicMaterial color={healthBar3} />
-      </mesh>
-      
-      {/* Health bar background */}
-      <mesh position={[0, 2.2, -0.1]}>
-        <planeGeometry args={[2.2, 0.3]} />
-        <meshBasicMaterial color="#222222" />
+      {/* Health indicator */}
+      <mesh position={[0, 3, 0]}>
+        <planeGeometry args={[3, 0.3]} />
+        <meshBasicMaterial color={health > 150 ? "#00ff00" : health > 75 ? "#ffff00" : "#ff0000"} />
       </mesh>
     </mesh>
   );
