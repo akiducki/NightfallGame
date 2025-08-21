@@ -34,19 +34,15 @@ export default function Player() {
     // Movement
     if (controls.forward) {
       newZ -= speed * delta;
-      console.log("Moving forward, new Z:", newZ);
     }
     if (controls.backward) {
       newZ += speed * delta;
-      console.log("Moving backward, new Z:", newZ);
     }
-    if (controls.leftward) {
+    if (controls.left) {
       newX -= speed * delta;
-      console.log("Moving left, new X:", newX);
     }
-    if (controls.rightward) {
+    if (controls.right) {
       newX += speed * delta;
-      console.log("Moving right, new X:", newX);
     }
 
     // Constrain movement based on game phase

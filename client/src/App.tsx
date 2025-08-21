@@ -14,8 +14,8 @@ import GameUI from "./components/GameUI";
 export enum Controls {
   forward = 'forward',
   backward = 'backward',
-  leftward = 'leftward',
-  rightward = 'rightward',
+  left = 'left',
+  right = 'right',
   shoot = 'shoot',
   reload = 'reload'
 }
@@ -23,8 +23,8 @@ export enum Controls {
 const controls = [
   { name: Controls.forward, keys: ["KeyW", "ArrowUp"] },
   { name: Controls.backward, keys: ["KeyS", "ArrowDown"] },
-  { name: Controls.leftward, keys: ["KeyA", "ArrowLeft"] },
-  { name: Controls.rightward, keys: ["KeyD", "ArrowRight"] },
+  { name: Controls.left, keys: ["KeyA", "ArrowLeft"] },
+  { name: Controls.right, keys: ["KeyD", "ArrowRight"] },
   { name: Controls.shoot, keys: ["Space", "Mouse0"] },
   { name: Controls.reload, keys: ["KeyR"] },
 ];
