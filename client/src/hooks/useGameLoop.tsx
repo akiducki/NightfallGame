@@ -7,6 +7,7 @@ export function useGameLoop() {
   const { 
     gamePhase, 
     playerHealth,
+    playerPosition,
     zombies,
     addZombie,
     nextChapter,
@@ -59,7 +60,7 @@ export function useGameLoop() {
         zombieSpawnInterval.current = 2000;
         break;
       case 'chapter2':
-        setCurrentObjective("Survive the chaos and reach the hill");
+        setCurrentObjective("Fight through the streets and reach the hill (look for yellow beacon)");
         zombieSpawnInterval.current = 1500;
         break;
       case 'chapter3':
@@ -94,6 +95,13 @@ export function useGameLoop() {
         if (zombies.length === 0 && !waveActive.current) {
           waveActive.current = true;
           currentWave.current++;
+          
+          // Check if player has survived enough waves to progress
+          if (currentWave.current > 5) {
+            console.log("Survived 5 waves! Moving to Chapter 1");
+            nextChapter();
+            return;
+          }
           
           // Spawn wave of zombies
           for (let i = 0; i < zombiesPerWave.current; i++) {
@@ -148,7 +156,20 @@ export function useGameLoop() {
 
       return () => clearInterval(spawnTimer);
     }
-  }, [gamePhase, zombies.length, addZombie]);
+  }, [gamePhase, zombies.length, addZombie, nextChapter]);
+
+  // Chapter progression based on player position
+  useEffect(() => {
+    if (!playerPosition) return;
+
+    const [x, y, z] = playerPosition;
+
+    // Chapter 2: Check if player reached the hill
+    if (gamePhase === 'chapter2' && z <= -40) {
+      console.log("Player reached the hill! Moving to Chapter 3");
+      nextChapter();
+    }
+  }, [playerPosition, gamePhase, nextChapter]);
 
   // Chapter progression logic
   useEffect(() => {

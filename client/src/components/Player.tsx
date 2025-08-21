@@ -51,9 +51,9 @@ export default function Player() {
 
     // Constrain movement based on game phase
     if (gamePhase === 'prologue') {
-      // Strictly confined to room - smaller boundaries
-      newX = Math.max(-4.5, Math.min(4.5, newX));
-      newZ = Math.max(-4.5, Math.min(4.5, newZ));
+      // Strictly confined to room - walls at position 5, so player boundary at 4.7
+      newX = Math.max(-4.7, Math.min(4.7, newX));
+      newZ = Math.max(-4.7, Math.min(4.7, newZ));
     } else if (gamePhase === 'chapter1' || gamePhase === 'chapter2') {
       // Street movement
       newX = Math.max(-10, Math.min(10, newX));

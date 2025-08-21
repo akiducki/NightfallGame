@@ -65,7 +65,7 @@ export default function GameUI() {
             <div className="text-white">{currentObjective}</div>
             {gamePhase === 'prologue' && (
               <div className="text-yellow-400 text-xs mt-2">
-                Clear all zombies to advance to next wave
+                Clear all zombies to advance to next wave (Survive 5 waves to escape)
               </div>
             )}
           </div>
