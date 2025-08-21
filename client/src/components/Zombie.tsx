@@ -27,26 +27,27 @@ export default function Zombie({ id, position, health, targetPosition }: ZombieP
       targetPosition[2] - position[2]
     ).normalize();
 
-    const speed = 2; // Zombie speed
+    const speed = 1.5; // Reduced zombie speed to give player more time
     const newX = position[0] + direction.x * speed * delta;
     const newZ = position[2] + direction.z * speed * delta;
 
     meshRef.current.position.set(newX, position[1], newZ);
 
-    // Check collision with player
+    // Check collision with player - need to be touching to damage
     const distance = Math.sqrt(
       Math.pow(targetPosition[0] - newX, 2) + 
       Math.pow(targetPosition[2] - newZ, 2)
     );
 
-    if (distance < 1.5 && Date.now() - lastDamageTime.current > damageCooldown) {
+    if (distance < 1.2 && Date.now() - lastDamageTime.current > damageCooldown) {
       lastDamageTime.current = Date.now();
-      damagePlayer(10);
-      console.log("Zombie", id, "damaged player");
+      damagePlayer(15);
+      console.log("Zombie", id, "damaged player, distance:", distance);
     }
 
-    // Update zombie position in state
-    // Note: In a full implementation, we'd update the zombie's position in the state
+    // Update position in the position array for collision detection
+    position[0] = newX;
+    position[2] = newZ;
   });
 
   // Remove zombie if health <= 0

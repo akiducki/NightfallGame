@@ -86,12 +86,39 @@ export default function GameUI() {
         </div>
       )}
 
-      {/* Chapter Transitions */}
+      {/* Chapter Transitions - Show briefly at top, non-blocking */}
       {gamePhase === 'prologue' && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="bg-black/90 p-6 rounded-lg border border-red-800">
-            <h3 className="text-2xl font-bold text-red-400 mb-2">Awakening</h3>
-            <p className="text-gray-300">You wake up in an abandoned room...</p>
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none z-10">
+          <div className="bg-red-900/80 p-3 rounded-lg border border-red-600 animate-pulse">
+            <h3 className="text-lg font-bold text-red-200 mb-1">PROLOGUE - Awakening</h3>
+            <p className="text-red-100 text-xs">Break out of the abandoned room</p>
+          </div>
+        </div>
+      )}
+      
+      {gamePhase === 'chapter1' && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none z-10">
+          <div className="bg-red-900/80 p-3 rounded-lg border border-red-600 animate-pulse">
+            <h3 className="text-lg font-bold text-red-200 mb-1">CHAPTER 1 - City Streets</h3>
+            <p className="text-red-100 text-xs">Fight through the infected city</p>
+          </div>
+        </div>
+      )}
+      
+      {gamePhase === 'chapter2' && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none z-10">
+          <div className="bg-red-900/80 p-3 rounded-lg border border-red-600 animate-pulse">
+            <h3 className="text-lg font-bold text-red-200 mb-1">CHAPTER 2 - Chaos</h3>
+            <p className="text-red-100 text-xs">Survive the overwhelming horde</p>
+          </div>
+        </div>
+      )}
+      
+      {gamePhase === 'chapter3' && (
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-center pointer-events-none z-10">
+          <div className="bg-red-900/80 p-3 rounded-lg border border-red-600 animate-pulse">
+            <h3 className="text-lg font-bold text-red-200 mb-1">CHAPTER 3 - Final Stand</h3>
+            <p className="text-red-100 text-xs">Face the boss in the cave</p>
           </div>
         </div>
       )}

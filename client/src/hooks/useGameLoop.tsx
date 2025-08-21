@@ -77,6 +77,12 @@ export function useGameLoop() {
 
     const spawnTimer = setInterval(() => {
       const now = Date.now();
+      const timeSinceChapterStart = now - chapterStartTime.current;
+      
+      // Give player 3 seconds grace period at start of each chapter
+      if (timeSinceChapterStart < 3000) {
+        return;
+      }
       
       if (now - lastZombieSpawn.current > zombieSpawnInterval.current) {
         lastZombieSpawn.current = now;
