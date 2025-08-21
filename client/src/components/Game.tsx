@@ -7,6 +7,7 @@ import Environment from "./Environment";
 import Zombie from "./Zombie";
 import Bullet from "./Bullet";
 import Boss from "./Boss";
+import FirstPersonWeapon from "./FirstPersonWeapon";
 import * as THREE from "three";
 
 export default function Game() {
@@ -23,16 +24,16 @@ export default function Game() {
   // Initialize game loop
   useGameLoop();
 
-  // Camera follow logic
+  // First-person camera logic
   useFrame(({ camera }) => {
     if (playerPosition) {
-      const targetX = playerPosition[0];
-      const targetZ = playerPosition[2] + 10;
-      const targetY = 8;
-
-      // Smooth camera movement
-      camera.position.lerp(new THREE.Vector3(targetX, targetY, targetZ), 0.05);
-      camera.lookAt(playerPosition[0], playerPosition[1], playerPosition[2]);
+      // Position camera at player's eye level for first-person view
+      const eyeHeight = 1.7; // Player eye height
+      camera.position.set(playerPosition[0], playerPosition[1] + eyeHeight, playerPosition[2]);
+      
+      // Look forward in the direction the player is facing
+      const lookDirection = new THREE.Vector3(playerPosition[0], playerPosition[1] + eyeHeight, playerPosition[2] - 5);
+      camera.lookAt(lookDirection);
       
       setCameraPosition([camera.position.x, camera.position.y, camera.position.z]);
     }
@@ -72,6 +73,9 @@ export default function Game() {
       {gamePhase === 'chapter3' && bossHealth > 0 && (
         <Boss health={bossHealth} />
       )}
+      
+      {/* First-person weapon view */}
+      <FirstPersonWeapon />
     </>
   );
 }

@@ -63,9 +63,9 @@ function App() {
               <Canvas
                 shadows
                 camera={{
-                  position: [0, 5, 10],
-                  fov: 60,
-                  near: 0.1,
+                  position: [0, 2.7, 0],
+                  fov: 75,
+                  near: 0.01,
                   far: 1000
                 }}
                 gl={{

@@ -84,15 +84,12 @@ export default function Player() {
   });
 
   return (
-    <mesh ref={meshRef} position={playerPosition || [0, 1, 0]} castShadow>
-      <capsuleGeometry args={[0.5, 1.5]} />
-      <meshStandardMaterial color="#4444ff" />
-      
-      {/* Weapon indicator */}
-      <mesh position={[0.3, 0.2, -0.5]}>
-        <boxGeometry args={[0.1, 0.1, 0.8]} />
-        <meshStandardMaterial color="#333333" />
+    <>
+      {/* Player body - hidden in first person, keep for collision detection */}
+      <mesh ref={meshRef} position={playerPosition || [0, 1, 0]} visible={false}>
+        <capsuleGeometry args={[0.5, 1.5]} />
+        <meshStandardMaterial color="#4444ff" />
       </mesh>
-    </mesh>
+    </>
   );
 }
