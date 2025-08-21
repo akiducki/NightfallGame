@@ -73,9 +73,9 @@ export default function Player() {
     if (controls.shoot && Date.now() - lastShotTime.current > shootCooldown) {
       lastShotTime.current = Date.now();
       
-      // Fire bullet forward (negative Z direction)
+      // Fire bullet straight forward from player center (towards negative Z)
       const bulletDirection: [number, number, number] = [0, 0, -1];
-      const bulletStartPosition: [number, number, number] = [newX, 1.5, newZ - 1];
+      const bulletStartPosition: [number, number, number] = [newX, 1.7, newZ - 0.5]; // Start from eye level
       
       fireBullet(bulletStartPosition, bulletDirection);
       playHit();

@@ -53,7 +53,10 @@ function App() {
   }, [setBackgroundMusic, setHitSound, setSuccessSound]);
 
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}>
+    <div 
+      className={gamePhase === 'menu' ? 'game-cursor-visible' : 'game-cursor-hidden'}
+      style={{ width: '100vw', height: '100vh', position: 'relative', overflow: 'hidden' }}
+    >
       {showCanvas && (
         <>
           {gamePhase === 'menu' && <StartScreen />}

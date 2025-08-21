@@ -12,6 +12,17 @@ export default function GameUI() {
 
   return (
     <div className="fixed inset-0 pointer-events-none">
+      {/* Crosshair cursor */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-50">
+        <div className="w-8 h-8 relative">
+          {/* Horizontal crosshair line */}
+          <div className="absolute top-1/2 left-1 right-1 h-0.5 bg-red-400 transform -translate-y-1/2 shadow-lg"></div>
+          {/* Vertical crosshair line */}
+          <div className="absolute left-1/2 top-1 bottom-1 w-0.5 bg-red-400 transform -translate-x-1/2 shadow-lg"></div>
+          {/* Center dot */}
+          <div className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-red-500 rounded-full transform -translate-x-1/2 -translate-y-1/2 shadow-lg"></div>
+        </div>
+      </div>
       {/* Top HUD */}
       <div className="absolute top-4 left-4 right-4 flex justify-between items-start pointer-events-auto">
         <div className="bg-black/80 p-4 rounded-lg border border-red-800 min-w-[200px]">

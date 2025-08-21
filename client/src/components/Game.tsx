@@ -24,47 +24,16 @@ export default function Game() {
   // Initialize game loop
   useGameLoop();
 
-  // Mouse control state
-  const mouseX = useRef(0);
-  const mouseY = useRef(0);
-  const cameraRotation = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      const sensitivity = 0.002;
-      mouseX.current = event.movementX * sensitivity;
-      mouseY.current = event.movementY * sensitivity;
-      
-      cameraRotation.current.y -= mouseX.current;
-      cameraRotation.current.x -= mouseY.current;
-      
-      // Limit vertical rotation
-      cameraRotation.current.x = Math.max(-Math.PI/3, Math.min(Math.PI/3, cameraRotation.current.x));
-    };
-
-    const handleClick = () => {
-      document.body.requestPointerLock();
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('click', handleClick);
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('click', handleClick);
-    };
-  }, []);
-
-  // First-person camera logic with mouse control
+  // First-person camera logic with fixed forward view
   useFrame(({ camera }) => {
     if (playerPosition) {
       // Position camera at player's eye level for first-person view
       const eyeHeight = 1.7; // Player eye height
       camera.position.set(playerPosition[0], playerPosition[1] + eyeHeight, playerPosition[2]);
       
-      // Apply mouse rotation
-      camera.rotation.x = cameraRotation.current.x;
-      camera.rotation.y = cameraRotation.current.y;
+      // Fixed forward-looking direction (no mouse look)
+      camera.rotation.set(0, 0, 0);
+      camera.lookAt(playerPosition[0], playerPosition[1] + eyeHeight, playerPosition[2] - 10);
       
       setCameraPosition([camera.position.x, camera.position.y, camera.position.z]);
     }
