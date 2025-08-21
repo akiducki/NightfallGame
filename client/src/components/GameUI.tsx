@@ -55,12 +55,19 @@ export default function GameUI() {
         </div>
       </div>
 
-      {/* Objective */}
+      {/* Objective and Wave Info */}
       {currentObjective && (
         <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 pointer-events-auto">
           <div className="bg-black/90 p-4 rounded-lg border border-red-800 text-center">
-            <div className="text-red-400 text-sm mb-1">Objective</div>
+            <div className="text-red-400 text-sm mb-1">
+              {gamePhase === 'prologue' ? 'Survival Room' : 'Objective'}
+            </div>
             <div className="text-white">{currentObjective}</div>
+            {gamePhase === 'prologue' && (
+              <div className="text-yellow-400 text-xs mt-2">
+                Clear all zombies to advance to next wave
+              </div>
+            )}
           </div>
         </div>
       )}

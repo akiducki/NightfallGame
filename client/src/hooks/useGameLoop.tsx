@@ -69,41 +69,85 @@ export function useGameLoop() {
     }
   }, [gamePhase, setCurrentObjective]);
 
-  // Zombie spawning logic
+  // Wave-based zombie spawning for prologue
+  const currentWave = useRef(0);
+  const zombiesPerWave = useRef(3);
+  const waveActive = useRef(false);
+
   useEffect(() => {
     if (gamePhase === 'menu' || gamePhase === 'victory' || gamePhase === 'defeat') {
       return;
     }
 
-    const spawnTimer = setInterval(() => {
-      const now = Date.now();
-      const timeSinceChapterStart = now - chapterStartTime.current;
-      
-      // Give player 3 seconds grace period at start of each chapter
-      if (timeSinceChapterStart < 3000) {
-        return;
-      }
-      
-      if (now - lastZombieSpawn.current > zombieSpawnInterval.current) {
-        lastZombieSpawn.current = now;
+    if (gamePhase === 'prologue') {
+      // Wave-based spawning for prologue
+      const waveTimer = setInterval(() => {
+        const now = Date.now();
+        const timeSinceChapterStart = now - chapterStartTime.current;
         
-        // Don't spawn too many zombies
-        if (zombies.length < 8) {
-          const spawnPosition = getRandomSpawnPosition(gamePhase);
-          const zombieId = generateZombieId();
-          
-          addZombie({
-            id: zombieId,
-            position: spawnPosition,
-            health: 100
-          });
-          
-          console.log("Spawned zombie", zombieId, "at position", spawnPosition);
+        // Give player 5 seconds grace period at start
+        if (timeSinceChapterStart < 5000) {
+          return;
         }
-      }
-    }, 100);
 
-    return () => clearInterval(spawnTimer);
+        // Start new wave if no zombies left and not currently spawning a wave
+        if (zombies.length === 0 && !waveActive.current) {
+          waveActive.current = true;
+          currentWave.current++;
+          
+          // Spawn wave of zombies
+          for (let i = 0; i < zombiesPerWave.current; i++) {
+            setTimeout(() => {
+              const spawnPosition = getRandomSpawnPosition(gamePhase);
+              const zombieId = generateZombieId();
+              
+              addZombie({
+                id: zombieId,
+                position: spawnPosition,
+                health: 100
+              });
+              
+              console.log(`Wave ${currentWave.current}: Spawned zombie ${i + 1}/${zombiesPerWave.current}`, zombieId);
+            }, i * 1000); // 1 second delay between each zombie in wave
+          }
+          
+          // Increase difficulty for next wave
+          setTimeout(() => {
+            waveActive.current = false;
+            if (zombiesPerWave.current < 6) {
+              zombiesPerWave.current++;
+            }
+          }, zombiesPerWave.current * 1000);
+        }
+      }, 500);
+
+      return () => clearInterval(waveTimer);
+    } else {
+      // Regular spawning for other chapters
+      const spawnTimer = setInterval(() => {
+        const now = Date.now();
+        
+        if (now - lastZombieSpawn.current > zombieSpawnInterval.current) {
+          lastZombieSpawn.current = now;
+          
+          // Don't spawn too many zombies
+          if (zombies.length < 8) {
+            const spawnPosition = getRandomSpawnPosition(gamePhase);
+            const zombieId = generateZombieId();
+            
+            addZombie({
+              id: zombieId,
+              position: spawnPosition,
+              health: 100
+            });
+            
+            console.log("Spawned zombie", zombieId, "at position", spawnPosition);
+          }
+        }
+      }, 100);
+
+      return () => clearInterval(spawnTimer);
+    }
   }, [gamePhase, zombies.length, addZombie]);
 
   // Chapter progression logic

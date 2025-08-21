@@ -51,9 +51,9 @@ export default function Player() {
 
     // Constrain movement based on game phase
     if (gamePhase === 'prologue') {
-      // Confined to room
-      newX = Math.max(-4, Math.min(4, newX));
-      newZ = Math.max(-4, Math.min(4, newZ));
+      // Strictly confined to room - smaller boundaries
+      newX = Math.max(-4.5, Math.min(4.5, newX));
+      newZ = Math.max(-4.5, Math.min(4.5, newZ));
     } else if (gamePhase === 'chapter1' || gamePhase === 'chapter2') {
       // Street movement
       newX = Math.max(-10, Math.min(10, newX));
@@ -69,13 +69,17 @@ export default function Player() {
     setPlayerPosition(newPosition);
     meshRef.current.position.set(newX, 1, newZ);
 
-    // Shooting
+    // Shooting - now follows camera direction
     if (controls.shoot && Date.now() - lastShotTime.current > shootCooldown) {
       lastShotTime.current = Date.now();
       
-      // Fire bullet straight forward from player center (towards negative Z)
-      const bulletDirection: [number, number, number] = [0, 0, -1];
-      const bulletStartPosition: [number, number, number] = [newX, 1.7, newZ - 0.5]; // Start from eye level
+      // Get camera direction for bullet firing
+      const camera = state.camera;
+      const direction = new THREE.Vector3();
+      camera.getWorldDirection(direction);
+      
+      const bulletDirection: [number, number, number] = [direction.x, direction.y, direction.z];
+      const bulletStartPosition: [number, number, number] = [newX, 1.7, newZ]; // Start from eye level
       
       fireBullet(bulletStartPosition, bulletDirection);
       playHit();
