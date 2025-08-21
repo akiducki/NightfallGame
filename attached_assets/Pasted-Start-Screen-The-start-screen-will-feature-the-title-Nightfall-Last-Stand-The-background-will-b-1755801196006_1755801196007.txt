@@ -1,0 +1,71 @@
+Start Screen
+The start screen will feature the title "Nightfall: Last Stand".
+
+The background will be a dark, ominous depiction of a ruined city with a red glow.
+
+The main options will be a "Start Game" button and a "Settings" button.
+
+Awakening Screen (Prologue)
+
+Mechanic: The player starts in a confined, abandoned room. Zombies will break in through doors and windows.
+
+
+
+Control: The player uses a weapon that they automatically grasp to shoot the zombies. The ammo is unlimited. Health is recovered with each zombie killed.
+
+
+
+Chapter 1: Escape to the Streets
+
+Mechanic: The player bursts out into the city streets. They must navigate a linear path with obstacles. The game features continuous waves of zombies and monsters.
+
+
+
+
+Control: The player uses movement controls to navigate through the city and a shooting mechanic to fight enemies. Health is restored with each enemy killed. Optional weapon upgrades can be picked up.
+
+
+
+Chapter 2: Survival in Chaos
+
+Mechanic: The streets are filled with danger, and the player is relentlessly hunted by mutant monsters. Dynamic monster spawns and collisions reduce the player's health if they are hit.
+
+
+
+Control: The player must dodge debris and navigate alleys. The player's aggressive gameplay is rewarded, as they collect health by killing zombies. The VR immersion is enhanced with particle effects.
+
+
+
+Chapter 3: The Hill and Cave
+
+Mechanic: The player reaches a hill with a cave at its peak and enters it for the final boss fight. The boss has a visible weak spot with glowing cues. Health recovery from killing zombies continues, but the boss is stronger.
+
+
+
+
+
+Control: The player must navigate the last stretch of streets to the hill. Inside the cave, the player must identify and strike the boss's glowing weak spot.
+
+
+Final Chapter: Victory or Defeat
+Mechanic:
+
+
+Victory: The player repeatedly strikes the boss's weak spot until it collapses.
+
+
+Defeat: The boss overwhelms the player.
+
+
+Control:
+
+The player continues to use shooting mechanics to defeat the boss.
+
+The final screen displays the outcome with sound and visual effects.
+
+
+
+
+
+
+
