@@ -27,7 +27,7 @@ export default function Zombie({ id, position, health, targetPosition }: ZombieP
       targetPosition[2] - position[2]
     ).normalize();
 
-    const speed = 1.5; // Reduced zombie speed to give player more time
+    const speed = 0.8; // Much slower zombie speed for better gameplay
     const newX = position[0] + direction.x * speed * delta;
     const newZ = position[2] + direction.z * speed * delta;
 
