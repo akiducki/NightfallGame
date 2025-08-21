@@ -7,14 +7,14 @@ export function generateZombieId(): string {
 export function getRandomSpawnPosition(gamePhase: string): [number, number, number] {
   switch (gamePhase) {
     case 'prologue':
-      // Spawn around the edges of the room
+      // Spawn around the edges of the room, but further away from center
       const side = Math.floor(Math.random() * 4);
       switch (side) {
-        case 0: return [Math.random() * 8 - 4, 1, -4.5]; // Front wall
-        case 1: return [Math.random() * 8 - 4, 1, 4.5];  // Back wall
-        case 2: return [-4.5, 1, Math.random() * 8 - 4]; // Left wall
-        case 3: return [4.5, 1, Math.random() * 8 - 4];  // Right wall
-        default: return [0, 1, -4.5];
+        case 0: return [Math.random() * 6 - 3, 1, -4.8]; // Front wall - further out
+        case 1: return [Math.random() * 6 - 3, 1, 4.8];  // Back wall - further out
+        case 2: return [-4.8, 1, Math.random() * 6 - 3]; // Left wall - further out
+        case 3: return [4.8, 1, Math.random() * 6 - 3];  // Right wall - further out
+        default: return [0, 1, -4.8];
       }
       
     case 'chapter1':
