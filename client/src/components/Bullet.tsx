@@ -42,7 +42,6 @@ export default function Bullet({ id, position, direction, speed }: BulletProps) 
       if (distance < 1.0) {
         damageZombie(zombie.id, 50);
         removeBullet(id);
-        console.log("Bullet", id, "hit zombie", zombie.id);
         return;
       }
     });
@@ -59,7 +58,6 @@ export default function Bullet({ id, position, direction, speed }: BulletProps) 
       if (distanceToBoss < 2.0) {
         damageBoss(25);
         removeBullet(id);
-        console.log("Bullet", id, "hit boss");
         return;
       }
     }
@@ -68,7 +66,6 @@ export default function Bullet({ id, position, direction, speed }: BulletProps) 
     if (Date.now() - startTime.current > maxLifetime || 
         Math.abs(newX) > 50 || Math.abs(newZ) > 50) {
       removeBullet(id);
-      console.log("Bullet", id, "expired");
     }
   });
 

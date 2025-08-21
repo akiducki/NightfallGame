@@ -115,7 +115,7 @@ export function useGameLoop() {
                 health: 100
               });
               
-              console.log(`Wave ${currentWave.current}: Spawned zombie ${i + 1}/${zombiesPerWave.current}`, zombieId);
+              // Wave zombie spawned
             }, i * 1000); // 1 second delay between each zombie in wave
           }
           
@@ -149,7 +149,7 @@ export function useGameLoop() {
               health: 100
             });
             
-            console.log("Spawned zombie", zombieId, "at position", spawnPosition);
+            // Zombie spawned
           }
         }
       }, 100);

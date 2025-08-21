@@ -31,22 +31,18 @@ export default function Player() {
     let newX = currentPosition[0];
     let newZ = currentPosition[2];
 
-    // Movement
+    // Movement with smoothing
     if (controls.forward) {
       newZ -= speed * delta;
-      console.log("Moving forward, new Z:", newZ);
     }
     if (controls.backward) {
       newZ += speed * delta;
-      console.log("Moving backward, new Z:", newZ);
     }
     if (controls.leftward) {
       newX -= speed * delta;
-      console.log("Moving left, new X:", newX);
     }
     if (controls.rightward) {
       newX += speed * delta;
-      console.log("Moving right, new X:", newX);
     }
 
     // Constrain movement based on game phase
@@ -83,7 +79,6 @@ export default function Player() {
       
       fireBullet(bulletStartPosition, bulletDirection);
       playHit();
-      console.log("Fired bullet from:", bulletStartPosition, "direction:", bulletDirection);
     }
   });
 
