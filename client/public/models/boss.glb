@@ -1,0 +1,3 @@
+# This is a placeholder for a boss 3D model in GLB format
+# In a real implementation, you would place an actual GLB file here
+# For now, the game uses simple box geometry for the boss
