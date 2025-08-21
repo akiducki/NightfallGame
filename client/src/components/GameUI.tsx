@@ -5,7 +5,7 @@ import { Progress } from "./ui/progress";
 import { Volume2, VolumeX, Home } from "lucide-react";
 
 export default function GameUI() {
-  const { gamePhase, playerHealth, zombieKills, currentObjective, restartGame, goToMenu } = useGameState();
+  const { gamePhase, playerHealth, zombieKills, bossHealth, currentObjective, restartGame, goToMenu } = useGameState();
   const { isMuted, toggleMute } = useAudio();
 
   if (gamePhase === 'menu') return null;
@@ -23,6 +23,37 @@ export default function GameUI() {
         <div className="bg-black/80 p-4 rounded-lg border border-red-800">
           <div className="text-red-400 text-sm">Kills: <span className="text-white">{zombieKills}</span></div>
         </div>
+
+        {/* Boss health bars (only in chapter 3) */}
+        {gamePhase === 'chapter3' && (
+          <div className="bg-black/80 p-3 rounded-lg border border-purple-800">
+            <div className="text-purple-400 text-sm mb-2">Boss Health</div>
+            <div className="flex gap-1 mb-2">
+              {/* Health bar 1 (600-401) */}
+              <div className="w-10 h-3 bg-gray-700 rounded overflow-hidden">
+                <div 
+                  className="h-full bg-green-500 transition-all duration-300"
+                  style={{ width: `${bossHealth > 400 ? 100 : 0}%` }}
+                />
+              </div>
+              {/* Health bar 2 (400-201) */}
+              <div className="w-10 h-3 bg-gray-700 rounded overflow-hidden">
+                <div 
+                  className="h-full bg-yellow-500 transition-all duration-300"
+                  style={{ width: `${bossHealth > 200 ? (bossHealth > 400 ? 100 : ((bossHealth - 200) / 200) * 100) : 0}%` }}
+                />
+              </div>
+              {/* Health bar 3 (200-1) */}
+              <div className="w-10 h-3 bg-gray-700 rounded overflow-hidden">
+                <div 
+                  className="h-full bg-red-500 transition-all duration-300"
+                  style={{ width: `${bossHealth > 0 ? (bossHealth > 200 ? 100 : (bossHealth / 200) * 100) : 0}%` }}
+                />
+              </div>
+            </div>
+            <div className="text-xs text-gray-400">{bossHealth}/600</div>
+          </div>
+        )}
 
         <div className="flex gap-2">
           <Button

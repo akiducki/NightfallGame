@@ -70,7 +70,7 @@ export const useGameState = create<GameState>()(
     currentObjective: null,
     zombies: [],
     bullets: [],
-    bossHealth: 200,
+    bossHealth: 600,
     
     // Game flow actions
     startGame: () => {
@@ -81,7 +81,7 @@ export const useGameState = create<GameState>()(
         zombieKills: 0,
         zombies: [],
         bullets: [],
-        bossHealth: 200,
+        bossHealth: 600,
         currentObjective: null
       });
       console.log("Game started - Prologue phase");
@@ -99,7 +99,7 @@ export const useGameState = create<GameState>()(
         zombieKills: 0,
         zombies: [],
         bullets: [],
-        bossHealth: 200,
+        bossHealth: 600,
         currentObjective: null
       });
       console.log("Returned to menu");
